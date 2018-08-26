@@ -21,4 +21,4 @@ extractor> sbt test
 ```
 extractor> sbt run [in_file_name (default: in.json)] [out_file_name (default: out.json)]
 ```
-note: default files are in src/main/resources
+note: default in/output files above are in src/main/resources
