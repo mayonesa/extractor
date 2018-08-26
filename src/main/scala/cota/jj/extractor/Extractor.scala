@@ -8,27 +8,24 @@ class Extractor(source: String) {
   private lazy val dateFormat = new SimpleDateFormat("MM/dd/yyyy")
   private lazy val datePattern = raw"(\d{2})/(\d{2})/(\d{4})".r
   private lazy val timesInMillis = datePattern.findAllIn(source).map(dateFormat.parse(_).getTime).toSet
-  private lazy val nDaysVal = if (timesInMillis.size < 2) 0
-                              else ((timesInMillis.max - timesInMillis.min) / millisPerDay + 1) 
-  private lazy val genderVal = cat(Set("he", "him"), Set("she", "her"), "male", "female", "unknown", .9f) 
-  private lazy val sentimentVal = cat(Set("happy", "glad", "jubilant", "satisfied"), 
-                                      Set("sad", "disappointed", "angry", "frustrated"),
-                                      "positive", "negative", "mixed", .75f)
-  
+
   // assumption: max-min MM/DD/YYYY inclusive diff
-  private[extractor] def nDays = nDaysVal
+  private[extractor] lazy val nDays = if (timesInMillis.size < 2) 0
+                                      else ((timesInMillis.max - timesInMillis.min) / millisPerDay + 1)
     
   // assumptions: 
   //  ● only "he"/"him" and "she"/"her" considered
   //  ● gender >= 90%
-  private[extractor] def gender = genderVal
+  private[extractor] lazy val gender = cat(Set("he", "him"), Set("she", "her"), "male", "female", "unknown", .9f)
     
   // assumptions: 
   //  ● Positive sentiments: Happy, Glad, Jubilant, Satisfied
   //  ● Negative sentiments: Sad, Disappointed, Angry, Frustrated  
   //  ● sentiment >= 75%
-  private[extractor] def sentiment = sentimentVal
-    
+  private[extractor] lazy val sentiment = cat(Set("happy", "glad", "jubilant", "satisfied"),
+                                              Set("sad", "disappointed", "angry", "frustrated"),
+                                              "positive", "negative", "mixed", .75f)
+
   private def cat(lTkns: Set[String],
                   rTkns: Set[String],
                   lLbl: String, // left label
