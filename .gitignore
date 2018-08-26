@@ -6,6 +6,5 @@
 bin/
 target/
 **/.DS_Store
-src/test/resources/out.test.json
 src/main/resources/out.json
 *.tar.gz
