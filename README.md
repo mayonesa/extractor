@@ -19,4 +19,4 @@ extractor> sbt test
 ***To Run***:
 
 ```
-extractor> sbt run [in_file_name] [out_file_name]
+extractor> sbt run [in_file_name (default: in.json)] [out_file_name (default: out.json)]
