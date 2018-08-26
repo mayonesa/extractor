@@ -2,16 +2,18 @@ package cota.jj.extractor
 
 import java.text.SimpleDateFormat
 
-class Extractor(source: String) {
-  private lazy val millisPerDay = 86400000
+private[extractor] class Extractor(source: String) {
   private lazy val words = source.toLowerCase.split("\\W+").toSeq
-  private lazy val dateFormat = new SimpleDateFormat("MM/dd/yyyy")
-  private lazy val datePattern = raw"(\d{2})/(\d{2})/(\d{4})".r
-  private lazy val timesInMillis = datePattern.findAllIn(source).map(dateFormat.parse(_).getTime).toSet
 
   // assumption: max-min MM/DD/YYYY inclusive diff
-  private[extractor] lazy val nDays = if (timesInMillis.size < 2) 0
-                                      else ((timesInMillis.max - timesInMillis.min) / millisPerDay + 1)
+  private[extractor] lazy val nDays = {
+    val dateFormat = new SimpleDateFormat("MM/dd/yyyy")
+    val datePattern = raw"(\d{2})/(\d{2})/(\d{4})".r
+    val timesInMillis = datePattern.findAllIn(source).map(dateFormat.parse(_).getTime).toSet
+    val millisPerDay = 86400000
+    if (timesInMillis.size < 2) 0
+    else ((timesInMillis.max - timesInMillis.min) / millisPerDay + 1)
+  }
     
   // assumptions: 
   //  ● only "he"/"him" and "she"/"her" considered
