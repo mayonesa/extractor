@@ -8,7 +8,7 @@ Extracts date range, gender, and sentiment from JSON paragraph
 
 ## Ops
 
-[SBT](https://www.scala-sbt.org/) is required for below instructions but binaries w/ launcher script can be sent if preferred.
+[SBT](https://www.scala-sbt.org/) is required for below instructions.
 
 ***To Test***: 
 
