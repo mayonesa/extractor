@@ -4,7 +4,8 @@
 .project
 .settings/
 bin/
-build.sbt
 target/
-out.json
-out.test.json
+**/.DS_Store
+src/test/resources/out.test.json
+src/main/resources/out.json
+*.tar.gz
