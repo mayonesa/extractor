@@ -1,4 +1,4 @@
-package cota.jj.extractor
+package extractor
 
 import org.scalatest.FlatSpec
 

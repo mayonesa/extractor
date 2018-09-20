@@ -1,4 +1,4 @@
-package cota.jj.extractor
+package extractor
 
 import java.text.SimpleDateFormat
 
@@ -34,7 +34,7 @@ private[extractor] class Extractor(source: String) {
                   rLbl: String, // right label
                   nLbl: String, // neither left or right (just staying home tonight) label
                   lThreshold: Float) = {
-    def n(tkns: Set[String]) = words.filter(tkns).size   
+    def n(tkns: Set[String]) = words.filter(tkns).size
     val nLs = n(lTkns)
     val nRs = n(rTkns)
     val total = nLs + nRs
